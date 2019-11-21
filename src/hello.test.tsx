@@ -2,15 +2,14 @@ import React from 'react';
 import {render, fireEvent} from "@testing-library/react";
 import Hello from "./hello";
 
-
 describe('Hello', () => {
-  test('handle onChange', () => {
-    const mockOnChange = jest.fn()
-    const wrapper = render(<Hello name='typescript' onChange={mockOnChange}/>)
-    const inputNode = wrapper.container.querySelector('input')!
+  it('should update text value if clicked on the button', () => {
+    const {container} = render(<Hello/>)
 
-    fireEvent.change(inputNode, {target: {value: 'react'}});
+    const button = container.querySelector('button')!;
+    fireEvent.click(button);
 
-    expect(mockOnChange).toHaveBeenCalledWith('react');
+    const textInput = container.querySelector('input')!;
+    expect(textInput.value).toEqual('world');
   });
 })
